@@ -1,48 +1,23 @@
 #!/bin/bash
-# ==========================================
-# Check if all dependencies are installed
-# ==========================================
+set -euo pipefail
 
-TOOLS=(
-    "amass"
-    "findomain"
-    "massdns"
-    "subfinder"
-    "assetfinder"
-    "chaos"
-    "gau"
-    "github-subdomains"
-    "gitlab-subdomains"
-    "cero"
-    "anew"
-    "shosubgo"
-    "httpx"
-    "unfurl"
-    "puredns"
-    "dnsx"
-)
+sudo apt update && sudo apt install -y wget curl git unzip jq python3 python3-pip
 
-echo "[*] Checking required tools..."
+# Go tools
+GO111MODULE=on go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+GO111MODULE=on go install github.com/tomnomnom/assetfinder@latest
+GO111MODULE=on go install github.com/projectdiscovery/httpx/cmd/httpx@latest
+GO111MODULE=on go install github.com/lc/gau/v2/cmd/gau@latest
 
-MISSING=0
-for tool in "${TOOLS[@]}"; do
-    if ! command -v $tool &>/dev/null; then
-        echo "[-] $tool is NOT installed"
-        ((MISSING++))
-    else
-        echo "[+] $tool is installed"
-    fi
-done
+# Native tools
+sudo apt install -y amass ffuf cewl
 
-if [ $MISSING -eq 0 ]; then
-    echo "[✔] All dependencies are installed!"
-else
-    echo "[!] $MISSING tools are missing. Run ./install.sh to install them."
-fi
+# findomain
+wget https://github.com/findomain/findomain/releases/latest/download/findomain-linux -O findomain
+chmod +x findomain
+sudo mv findomain /usr/local/bin/
 
-# Check API keys file
-if [[ -f "apikeys.sh" ]]; then
-    echo "[*] Found apikeys.sh"
-else
-    echo "[!] apikeys.sh not found. Create it and add your API keys."
-fi
+# Optional DNS tools
+sudo apt install -y massdns
+go install github.com/projectdiscovery/puredns/v2/cmd/puredns@latest
+go install github.com/projectdiscovery/dnsx/cmd/dnsx@latest
