@@ -1,0 +1,6 @@
+# Store your API keys here for Shodan, Censys, Chaos, etc.
+
+export SHODAN_API_KEY="YOUR_SHODAN_API_KEY"
+export CENSYS_API_ID="YOUR_CENSYS_API_ID"
+export CENSYS_API_SECRET="YOUR_CENSYS_API_SECRET"
+export CHAOS_API_KEY="YOUR_CHAOS_API_KEY"
