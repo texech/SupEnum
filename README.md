@@ -1,4 +1,4 @@
-# Subenum – Powerful Subdomain Enumeration Toolkit
+# SupEnum – Powerful Subdomain Enumeration Toolkit
 
 ## Features
 - Supports **single domain** or **list of domains**
@@ -10,19 +10,19 @@
 
 ## Installation
 ```bash
-git clone https://github.com/texech/subenum.git
-cd subenum
-chmod +x install.sh check_deps.sh subenum.sh
+git clone https://github.com/texech/supenum.git
+cd supenum
+chmod +x install.sh check_deps.sh supenum.sh
 ./install.sh
 ```
 ## Usage
 Single domain
 ```bash
-./subenum.sh example.com
+./supenum.sh example.com
 ```
 Multiple domains
 ```bash
-./subenum.sh domains.txt
+./supenum.sh domains.txt
 ```
 ## API Keys
 ```bash
